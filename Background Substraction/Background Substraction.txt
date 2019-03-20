@@ -1,0 +1,80 @@
+1. Membaca file video
+clc;clear;close all;
+vid = VideoReader('SampleVideo.mp4');
+============================================================================================
+2. Mengekstrak semua frame yang ada pada video (80 frame)
+vidWidth = vid.Width;
+vidHeight = vid.Height;
+mov = struct('cdata',zeros(vidHeight,vidWidth,3,'uint8'),...
+    'colormap',[]);
+frames = zeros(vidHeight,vidWidth,3,80);
+numFrames = get(vid,'NumberOfFrames');
+for k=1:numFrames
+    frames(:,:,:,k) = read(vid,k);
+end
+============================================================================================
+3. Mencari BackgroundFrame secara otomatis dengan cara menghitung nilai modus pada setiap 
+frame
+R = squeeze(frames(:,:,1,:));
+G = squeeze(frames(:,:,2,:));
+B = squeeze(frames(:,:,3,:));
+
+R_back = uint8(mode(R,3));
+G_back = uint8(mode(G,3));
+B_back = uint8(mode(B,3));
+ 
+Background = cat(3,R_back,G_back,B_back);
+============================================================================================
+4. Melakukan operasi background subtraction dengan metode pengurangan citra grayscale pada 
+setiap frame
+for x = 1:80
+    CurrentFrame = uint8(frames(:,:,:,x));
+    
+    % Mengkonversi citra menjadi grayscale
+    Background_gray = rgb2gray(Background);
+    CurrentFrame_gray = rgb2gray(CurrentFrame);
+    
+    % Pengurangan citra grayscale
+    Subtraction = (double(Background_gray)-double(CurrentFrame_gray));
+    Min_S = min(Subtraction(:));
+    Max_S = max(Subtraction(:));
+    Subtraction = ((Subtraction-Min_S)/(Max_S-Min_S))*255;
+    Subtraction = uint8(Subtraction);
+============================================================================================
+5. Mengkonversi citra hasil pengurangan menjadi citra biner
+    % Mengkonversi citra menjadi biner menggunakan metode Otsu
+    Subtraction = ~im2bw(Subtraction,graythresh(Subtraction));
+============================================================================================
+6. Melakukan operasi morfologi untuk menghilangkan noise
+    % Operasi Morfologi
+    bw = imfill(Subtraction,'holes');
+    bw = bwareaopen(bw,10);
+============================================================================================
+7. Buat masking hasil deteksi
+    % Pembuatan masking dan proses cropping
+    [row,col] = find(bw==1);
+    h_bw = imcrop(CurrentFrame,[min(col) min(row) max(col)-min(col) max(row)-min(row)]);
+    
+    [a,b] = size(bw);
+    mask = false(a,b);
+    mask(min(row):max(row),min(col):max(col)) = 1;
+    mask =  bwperim(mask,8);
+    mask = imdilate(mask,strel('square',3));
+    R = CurrentFrame(:,:,1);
+    G = CurrentFrame(:,:,2);
+    B = CurrentFrame(:,:,3);
+    R(mask) = 255;
+    G(mask) = 0;
+    B(mask) = 0;
+RGB = cat(3,R,G,B);
+============================================================================================
+8. Memvisualisasikan hasil deteksi ke dalam citra Frame
+    mov(x).cdata = RGB;
+
+hf = figure;
+set(hf,'position',[500 500 vidWidth vidHeight]);
+ 
+movie(hf,mov,2,vid.FrameRate);
+close
+============================================================================================
+
