@@ -58,14 +58,25 @@ for x = 1:numFrames
     R(mask) = 255;
     G(mask) = 0;
     B(mask) = 0;
-RGB = cat(3,R,G,B);
-%     mov(x).cdata = RGB;
+    
+    RGB = cat(3,R,G,B);
+    mov(x).cdata = RGB;
+end;
 
+%show figure
 % hf = figure;
-% set(hf,'position',[500 500 vidWidth vidHeight]);
-%  
+% set(hf,'position',[400 200 vidWidth vidHeight]);
 % movie(hf,mov,2,vid.FrameRate);
-    imshow(RGB);title('Figure');
-end
-close;
+
+%export video
+newVid = VideoWriter('Background Subs.mp4','MPEG-4');
+newVid.FrameRate = 24;
+newVid.Quality = 100;
+open(newVid)
+    for i = 1:numFrames
+        writeVideo(newVid,mov(i));
+    end;
+close(newVid)
+
+close
 
