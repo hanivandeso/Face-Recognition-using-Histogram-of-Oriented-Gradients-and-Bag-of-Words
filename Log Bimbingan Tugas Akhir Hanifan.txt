@@ -1,0 +1,33 @@
+bimbingan FSV 15/02/2019 (Ruang Aslab)
+- Memperlihatkan dataset yang udah diambil
+- Deteksi Gerak
+- Deteksi Wajah
+- nanti output dari deteksi wajahnya ditrain untuk dilakukan rekognisi
+- Perbanyak eksperimen di rekognisi, jangan kelamaan mikir deteksinya gimana
+
+bimbingan EAR 18/02/2019 (Roaster FIF Gd A)
+> metode moving detection : Background substraction, 
+> metode tracking : Gaussian mixture model, karman filter
+- pakai background substraction
+- gausah pakai tracking dan deteksi gerak
+- pakai bounding box yang besarnya dikira kira disitu ada area kepala
+- setelah itu langsung di ekstraksi fitur di area itu
+
+bimibingan FSV 08/03/2019 (E109)
+> Laporan background substraction
+- pahami modul background substraction yang dipakai
+- cari caranya gimana bisa deteksi kepala
+- worstcase ambil dataset baru
+- pakai resource yang kamu punya
+
+bimbingan EAR 26/03/2019 (E109)
+- deteksi pakai viola jones
+- gajadi pake background subtraction
+- otak atik gimana caranya mengeliminasi yang bukan wajah di viola jones
+	- dibandingin pakai ekstraksi ciri pakai HOG
+	- atau cari di variable bbox apa keluarannya, terus dipisahin pake if else
+- Trim dataset saat posisi masuk dari pintu MM aja
+- dari dataset tersebut ambil masing masing 10 frame, yang selanjutnya akan dikelompokkan menjadi 1 kelas
+
+bimbingan FSV 27/03/2019 (E109)
+- dicobain dari viola jones itu semuanya yang tertangkap, terus dideteksi pakai deteksi mata, hasilnya berhasil mengeliminasi tidak? jika iya berarti ROI nya diambil sebagai training.
