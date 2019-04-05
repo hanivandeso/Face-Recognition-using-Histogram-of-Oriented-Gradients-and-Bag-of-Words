@@ -19,6 +19,7 @@ for k=1:numFrames
     %[676.5 130.5 208 258]
 end
 
+
 detect={};
 %Filter Viola-Jones
 for x = 1:numFrames
@@ -31,34 +32,44 @@ for x = 1:numFrames
         A = imcrop(CurrentFrame,bboxes{x});
         
         %save gambar
-        imwrite(A,strcat('frame-',num2str(x),'.png'));
-%         detect=[detect bboxes{x}];
+        imwrite(A,strcat('crop\frame-',num2str(x),'.png'));
     end
     IFaces = insertObjectAnnotation(I, 'rectangle', bboxes{x}, 'Face');
     mov(x).cdata = IFaces;
 %     figure, imshow(IFaces), title('Detected faces');
 end
 
-% %cropped detected frames
-% sz(detect,2);
-% for y = 1:sz
-%     A = imcrop(frames{k},[]);
-% end
+% %validasi ada mata atau tidak
+% LefteyeDetector = vision.CascadeObjectDetector('LeftEye');
+% RighteyeDetector = vision.CascadeObjectDetector('RightEye');
+% 
+%     for i = 1:numFrames
+%         writeVideo(newVid,mov(i));
+%     end;
+% I = imread('visionteam.jpg');
+% Leftbboxes = step(LefteyeDetector, I);
+% Rightbboxes = step(RighteyeDetector, I);
+% 
+% Ieye = insertObjectAnnotation(I, 'rectangle', Leftbboxes, 'Left eye');
+% Ieye = insertObjectAnnotation(Ieye, 'rectangle', Rightbboxes, 'Right eye');
+% figure, imshow(Ieye), title('Detected faces');
 
-%show video
-hf = figure;
-set(hf,'position',[400 200 vidWidth vidHeight]);
+% %show video
+% hf = figure;
+% set(hf,'position',[400 200 vidWidth vidHeight]);
+% 
+% movie(hf,mov,2,vid.FrameRate);
 
-movie(hf,mov,2,vid.FrameRate);
+% %export video
+% newVid = VideoWriter('coba.mp4','MPEG-4');
+% newVid.FrameRate = 24;
+% newVid.Quality = 100;
+% open(newVid)
+%     for i = 1:numFrames 
+%         writeVideo(newVid,mov(i));
+%     end;
+% close(newVid)
 
-%export video
-newVid = VideoWriter('coba.mp4','MPEG-4');
-newVid.FrameRate = 24;
-newVid.Quality = 100;
-open(newVid)
-    for i = 1:numFrames
-        writeVideo(newVid,mov(i));
-    end;
-close(newVid)
+disp('done');
 
 close
