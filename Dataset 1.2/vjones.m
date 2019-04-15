@@ -1,7 +1,7 @@
 clc;clear;close all;
 vid = VideoReader('16.mp4');
 
-vidWidth = vi`d.Width;
+vidWidth = vid.Width;
 vidHeight = vid.Height;
 
 mov = struct('cdata',zeros(vidHeight,vidWidth,3,'uint8'),'colormap',[]);

@@ -31,3 +31,7 @@ bimbingan EAR 26/03/2019 (E109)
 
 bimbingan FSV 27/03/2019 (E109)
 - dicobain dari viola jones itu semuanya yang tertangkap, terus dideteksi pakai deteksi mata, hasilnya berhasil mengeliminasi tidak? jika iya berarti ROI nya diambil sebagai training.
+
+bimbingan FSV 08/04/2019
+- ekstraksi fitur pakai HOG
+- pelajari lagi BOW itu gimana
