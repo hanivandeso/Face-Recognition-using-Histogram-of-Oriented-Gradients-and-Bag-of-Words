@@ -35,3 +35,13 @@ bimbingan FSV 27/03/2019 (E109)
 bimbingan FSV 08/04/2019
 - ekstraksi fitur pakai HOG
 - pelajari lagi BOW itu gimana
+
+bimbingan EAR 30/04/2019 
+- lanjutin ekstraksi ciri
+- bag of words = bag of visual words
+- boleh pake library, tidak masalah. karena bisa jadi lebih powerful dengan parameter parameter yang sudah disediakan. waktu pengerjaan lebih efisien, dan dapat memahami konsep lebih mudah
+
+bimbingan FSV 03/05/2019
+- HOG tanpa svm
+- Kerjakan HOG-BOW sampai KNN dulu sampai beres
+- kalau sudah sampe klasifier, masuk bab 4 untuk tunning
