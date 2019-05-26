@@ -28,18 +28,16 @@ for i = 1:size(listSubFolder,1)
             label(i,:) = 2;
         case 'Daffa'
             label(i,:) = 3;
-        case 'Dio'
-            label(i,:) = 4;
         case 'Fadil'
+            label(i,:) = 4;
+        case 'Hanif'
             label(i,:) = 5;
-        case 'Hanifan'
-            label(i,:) = 6;
         case 'Liu'
-            label(i,:) = 7;
+            label(i,:) = 6;
         case 'Maula'
-            label(i,:) = 8;
+            label(i,:) = 7;
         case 'Mentari'
-            label(i,:) = 9;
+            label(i,:) = 8;
         case 'Muadz'
             label(i,:) = 9;
         case 'Nada'
