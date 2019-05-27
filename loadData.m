@@ -21,41 +21,41 @@ for i = 1:size(listSubFolder,1)
 %     end
     switch name{1}
         case 'Ade'
-            label(i,:) = 0;
-        case 'Alvin'
             label(i,:) = 1;
-        case 'Ardy'
+        case 'Alvin'
             label(i,:) = 2;
-        case 'Daffa'
+        case 'Ardy'
             label(i,:) = 3;
-        case 'Fadil'
+        case 'Daffa'
             label(i,:) = 4;
-        case 'Hanif'
+        case 'Fadil'
             label(i,:) = 5;
-        case 'Liu'
+        case 'Hanif'
             label(i,:) = 6;
-        case 'Maula'
+        case 'Liu'
             label(i,:) = 7;
-        case 'Mentari'
+        case 'Maula'
             label(i,:) = 8;
-        case 'Muadz'
+        case 'Mentari'
             label(i,:) = 9;
-        case 'Nada'
+        case 'Muadz'
             label(i,:) = 10;
-        case 'Redy'
+        case 'Nada'
             label(i,:) = 11;
-        case 'Rezky'
+        case 'Redy'
             label(i,:) = 12;
-        case 'Ria'
+        case 'Rezky'
             label(i,:) = 13;
-        case 'Sena'
+        case 'Ria'
             label(i,:) = 14;
+        case 'Sena'
+            label(i,:) = 1;
         case 'Wiranata'
-            label(i,:) = 15;
-        case 'Yuda'
             label(i,:) = 16;
-        case 'Yusuf'
+        case 'Yuda'
             label(i,:) = 17;
+        case 'Yusuf'
+            label(i,:) = 18;
     end
     disp([listSubFolder(i).name, ' loaded']);
 end
