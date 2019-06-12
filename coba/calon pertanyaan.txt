@@ -1,0 +1,2 @@
+1. Desain dataset (jumlah)
+2. Pengujian pake classification learner matlab KNN SVM tanpa BOW

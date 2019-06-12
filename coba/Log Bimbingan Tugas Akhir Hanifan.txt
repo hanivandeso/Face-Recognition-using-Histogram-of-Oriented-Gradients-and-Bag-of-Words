@@ -1,0 +1,21 @@
+bimbingan FSV 15/02/2019
+- Memperlihatkan dataset yang udah diambil
+- Deteksi Gerak
+- Deteksi Wajah
+- nanti output dari deteksi wajahnya ditrain untuk dilakukan rekognisi
+- Perbanyak eksperimen di rekognisi, jangan kelamaan mikir deteksinya gimana
+
+bimbingan EAR 18/02/2019
+> metode moving detection : Background substraction, 
+> metode tracking : Gaussian mixture model, karman filter
+- pakai background substraction
+- gausah pakai tracking dan deteksi gerak
+- pakai bounding box yang besarnya dikira kira disitu ada area kepala
+- setelah itu langsung di ekstraksi fitur di area itu
+
+bimibingan FSV 08/03/2019
+> Laporan background substraction
+- pahami modul background substraction yang dipakai
+- cari caranya gimana bisa deteksi kepala
+- worstcase ambil dataset baru
+- pakai resource yang kamu punya
