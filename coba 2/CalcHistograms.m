@@ -9,7 +9,7 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
     num = 0;
     for i = 1 : length(directories)
         directory = char(directories(i));
-        num = num + length(dir([directory, '/', '*.jpg']));      
+        num = num + length(dir([directory, '/', '*.png']));      
     end
     
     if TrainSet == 1
@@ -24,7 +24,7 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
     index = 1;
     for i = 1 : length(directories)
         directory = char(directories(i));
-        imagefiles = dir([directory, '/', '*.jpg']);      
+        imagefiles = dir([directory, '/', '*.png']);      
         nfiles = length(imagefiles);    % Number of files found
         label = (i == 1) * -2 + 1;
         
