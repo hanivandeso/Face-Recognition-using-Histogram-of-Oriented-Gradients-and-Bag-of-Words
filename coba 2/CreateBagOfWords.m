@@ -19,11 +19,11 @@ function features = CreateBagOfWords(blockSize, patchSize, directories, trainSet
         nfiles = length(imagefiles);
         for ii=1:round(nfiles*trainSetPercentage)
             img = imread([directory ,'/', imagefiles(ii).name]);
-            imgr = imresize(img, [80,88]);
-            if (size(imgr , 1) < patchSize * 2 || size(imgr, 2) < patchSize * 2)
+%             imgr = imresize(img, [80,88]);
+            if (size(img , 1) < patchSize * 2 || size(img, 2) < patchSize * 2)
                 continue;
             end
-            hogPatches = ExtractHogPatches(imgr, patchSize, blockSize);
+            hogPatches = ExtractHogPatches(img, patchSize, blockSize);
             features(index : index + size(hogPatches, 1) - 1 , :) = hogPatches;
             index = index + size(hogPatches, 1);     
         end
