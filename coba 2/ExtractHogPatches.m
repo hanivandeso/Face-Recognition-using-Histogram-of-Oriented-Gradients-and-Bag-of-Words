@@ -8,5 +8,6 @@ function patches = ExtractHogPatches(img, patchSize, blockSize)
     end
     
    [frames] = vl_sift(img);
-   patches = hogPatches(img, frames', patchSize, blockSize);
+%    patches = hogPatches(img, frames', patchSize, blockSize);
+   patches = hogPatches(img, frames, patchSize, blockSize);
 end

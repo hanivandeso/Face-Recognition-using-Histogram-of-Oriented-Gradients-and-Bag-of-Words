@@ -11,9 +11,11 @@ for f = frames
     x = min(max(x, patchSize), size(img, 1) - patchSize);
     y = min(max(y, patchSize), size(img, 2) - patchSize);
     
+    %dari titik tengah x,y membuat patch seukuran patch size
     patch = img( x - patchSize/2 : x + patchSize/2, y - patchSize/2 : y + patchSize/2);
+    
     hog = vl_hog(patch, blockSize);
-    hog = reshape(hog, 1, []);
+    hog = reshape(hog, 1, []); %merangkai ulang array hog
     hog_patches = [hog_patches ; hog];
 end
 

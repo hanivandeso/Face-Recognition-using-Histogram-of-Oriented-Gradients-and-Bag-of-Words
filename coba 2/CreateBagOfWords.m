@@ -9,14 +9,20 @@
 %many are used for crosss validation.
 function features = CreateBagOfWords(blockSize, patchSize, directories, trainSetPercentage)
        
+    % Maximum size dari apa? dan untuk apa?
     max_size = 10000;
+    
+    % mengalokasikan memori dengan membuat variable
     features = zeros(max_size, patchSize * 31);
     
     index = 1;
+    % Perulangan sebanyak direktori
     for i = 1:length(directories)
         directory = char(directories(i));
         imagefiles = dir([directory, '/', '*.png']);      
         nfiles = length(imagefiles);
+        
+        
         for ii=1:round(nfiles*trainSetPercentage)
             img = imread([directory ,'/', imagefiles(ii).name]);
 %             imgr = imresize(img, [80,88]);

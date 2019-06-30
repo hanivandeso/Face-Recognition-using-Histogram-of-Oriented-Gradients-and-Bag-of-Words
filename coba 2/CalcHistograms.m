@@ -1,10 +1,10 @@
 %Author: Jacob Gildenblat, 2014
 %Compares the learned Visual Vocabulary and the image training\cross
-%calidation set, and computes histogram vectors.
+%validation set, and computes histogram vectors.
 
 function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories, TrainSet, trainSetPercentage)
     
-    %Count the number of total .jpg images that will be used.
+    %Count the number of total .png images that will be used.
     %We need this to pre-allocate the histograms for speed.
     num = 0;
     for i = 1 : length(directories)
@@ -27,6 +27,7 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
         imagefiles = dir([directory, '/', '*.png']);      
         nfiles = length(imagefiles);    % Number of files found
         label = (i == 1) * -2 + 1;
+%         label = i;
         
         if (TrainSet == 1)
             files = 1 : round(nfiles*trainSetPercentage);
@@ -36,9 +37,9 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
         
         for ii = files
            img = imread([directory ,'/', imagefiles(ii).name]);
-           if size(img , 1) < 128 || size(img, 2) < 128
-                continue;
-           end
+%            if size(img , 1) < 128 || size(img, 2) < 128
+%                 continue;
+%            end
            patches = ExtractHogPatches(img, patchSize, blockSize);
            D(index, : ) =  feature_histogram(codebook, patches);
            labels(index) = label;
