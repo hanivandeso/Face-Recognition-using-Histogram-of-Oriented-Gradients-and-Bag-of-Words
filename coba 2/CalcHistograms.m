@@ -26,8 +26,8 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
         directory = char(directories(i));
         imagefiles = dir([directory, '/', '*.png']);      
         nfiles = length(imagefiles);    % Number of files found
-        label = (i == 1) * -2 + 1;
-%         label = i;
+%         label = (i == 1) * -2 + 1;
+        label = i;
         
         if (TrainSet == 1)
             files = 1 : round(nfiles*trainSetPercentage);
