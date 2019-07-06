@@ -15,6 +15,7 @@ for f = frames
     patch = img( x - patchSize/2 : x + patchSize/2, y - patchSize/2 : y + patchSize/2);
     
     hog = vl_hog(patch, blockSize);
+%     hog = extractHOGFeatures(patch, 'BlockSize', blockSize);
     hog = reshape(hog, 1, []); %merangkai ulang array hog
     hog_patches = [hog_patches ; hog];
 end

@@ -46,9 +46,9 @@ imshow(readimage(trainingSet,Yusuf))
 patchSize = 16;
 blockSize = 4;
 
-extractorFcn = extractHOGFeatures(trainingSet);
-bag = bagOfFeatures(trainingSet,'CustomExtractor',extractorFcn)
-% bag = bagOfFeatures(trainingSet);
+% extractorFcn = extractHOGFeatures(trainingSet);
+% bag = bagOfFeatures(trainingSet,'CustomExtractor',extractorFcn)
+bag = bagOfFeatures(trainingSet);
 %%
 img = readimage(imds, 1);
 featureVector = encode(bag, img);
