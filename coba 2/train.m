@@ -46,9 +46,9 @@ extracted_feature = [Xtrain' Ytrain'];
 disp('Training SVM classifier.. ')
 % [W B] = vl_svmtrain(X, Y, 0.02);
 
-% t = templateSVM('Standardize',true,'KernelFunction','gaussian');
-% model_training_svm = fitcecoc(Xtrain', Ytrain','Learners',t);
-model_training_svm = fitcecoc(Xtrain', Ytrain');
+t = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
+model_training_svm = fitcecoc(Xtrain', Ytrain','Learners',t);
+% model_training_svm = fitcecoc(Xtrain', Ytrain'); %Linear
 
 disp('Success rate on train set: ')
 % sum(sign(W' * X + B) == Y) / length(Y)

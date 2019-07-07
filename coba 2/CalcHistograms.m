@@ -46,6 +46,6 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
            index = index + 1;
         end
     end
-    D = D';
-    labels = labels';
+    D = D;
+    labels = labels;
 end

@@ -4,6 +4,7 @@ hog_patches = [];
 
 if size(img, 1) <= patchSize || size(img, 2) <= patchSize
     img = imresize(img, [256 256]);
+%     img = imresize(img, [128 128]);
 end
 
 for f = frames
@@ -13,7 +14,6 @@ for f = frames
     
     %dari titik tengah x,y membuat patch seukuran patch size
     patch = img( x - patchSize/2 : x + patchSize/2, y - patchSize/2 : y + patchSize/2);
-    
     hog = vl_hog(patch, blockSize);
 %     hog = extractHOGFeatures(patch, 'BlockSize', blockSize);
     hog = reshape(hog, 1, []); %merangkai ulang array hog
