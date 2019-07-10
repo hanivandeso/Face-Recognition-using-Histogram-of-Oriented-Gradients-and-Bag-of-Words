@@ -6,6 +6,7 @@ close all;
 blockSize = 4;
 patchSize = 16;
 trainsetVal = 1;
+
 % directories = {' mac' , 'win'};
 directories = {fullfile('Data','Ade'),...
     fullfile('Data', 'Alvin'),...
@@ -35,10 +36,11 @@ disp('Features collected, clustering.. ')
 % [codebook, assignments] = vl_kmeans(features', 20, 'Initialization', 'plusplus'); %vl_kmeans
 
 
-tic;
-[assignments, codebook] = kmeans(features', 1300 ,'Distance','sqeuclidean','Display','final',...
-    'Replicates',15,'Options',statset('UseParallel',1)); %matlab's kmeans
-toc
+% tic;
+[assignments, codebook] = kmeans(features', 75 ,'Distance','sqeuclidean','Display','final',...
+    'Replicates',5); %matlab's kmeans
+% toc
+
 %Distance = euclidian (default)
 %Replicate = mencari distance terbaik disetiap iterasinya
 
@@ -65,25 +67,52 @@ for i = 1:cv.NumTestSets
     testPartition = Xtrain(cv.test(i),:);
     labelTestPartition = Ytrain(cv.test(i),:);
     
-%     svmParams = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
-    svmParams = templateSVM('Standardize',true,'KernelFunction','linear'); %linear
-    svmMdl =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParams,'coding','onevsone');
+    svmParamsR = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
+%     svmParamsP = templateSVM('KernelFunction','p', 'KernelScale', 'auto', 'Standardize', 1); % polynomial
+    svmParamsP = templateSVM('Standardize',true,'KernelFunction','polynomial'); % polynomial
+    svmParamsL = templateSVM('Standardize',true,'KernelFunction','linear'); %linear
+    svmMdlR =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsR,'coding','onevsone');
+    svmMdlP =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsP,'coding','onevsone');
+    svmMdlL =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsL,'coding','onevsone');
     %linear dikasus ini lebih baik dari RBF sekalipun diuji di
-    %classification learner
+    %classification learner.
     
-    predict = svmMdl.predict(testPartition);
-    correctPredict = predict == labelTestPartition; %Output Logical Value
-    confusionMat{i} = confusionmat(predict, labelTestPartition);
-    accuracy(i) = sum(correctPredict) / size(labelTestPartition, 1);
-    accuracy(i)
-end
-% jumlah keseluruhan confusion matrix
-sumConfusion = zeros(18,18);
-for i = 1:size(confusionMat,2)
-    sumConfusion = sumConfusion + confusionMat{i};
+    predictR = svmMdlR.predict(testPartition);
+    correctPredictR = predictR == labelTestPartition; %Output Logical Value
+    confusionMat{i} = confusionmat(predictR, labelTestPartition);
+    accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
+    accuracyR(i);
+    
+    predictP = svmMdlP.predict(testPartition);
+    correctPredictP = predictP == labelTestPartition; %Output Logical Value
+    confusionMat{i} = confusionmat(predictP, labelTestPartition);
+    accuracyP(i) = sum(correctPredictP) / size(labelTestPartition, 1);
+    accuracyP(i);
+    
+    predictL = svmMdlL.predict(testPartition);
+    correctPredictL = predictL == labelTestPartition; %Output Logical Value
+    confusionMat{i} = confusionmat(predictL, labelTestPartition);
+    accuracyL(i) = sum(correctPredictL) / size(labelTestPartition, 1);
+    accuracyL(i);
+    i
 end
 
-% rata-rata akurasi
-averageAcc = mean(accuracy);
-percentAcc = averageAcc * 100;
-percentAcc
+% jumlah keseluruhan confusion matrix
+% sumConfusion = zeros(18,18);
+% for i = 1:size(confusionMat,2)
+%     sumConfusion = sumConfusion + confusionMat{i};
+% end
+% 
+
+% 0-rata-rata akurasi
+averageAccR = mean(accuracyR);
+percentAccR = averageAccR * 100;
+percentAccR
+
+averageAccP = mean(accuracyP);
+percentAccP = averageAccP * 100;
+percentAccP
+
+averageAccL = mean(accuracyL);
+percentAccL = averageAccL * 100;
+percentAccL
