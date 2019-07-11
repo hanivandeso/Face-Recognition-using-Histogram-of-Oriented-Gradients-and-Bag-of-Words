@@ -1,11 +1,15 @@
-bimbingan FSV 15/02/2019 (Ruang Aslab)
+1. bimibingan EAR 15/01/2019 (E109)
+- Deteksi
+- kerjakan secepatnya
+
+2. bimbingan FSV 15/02/2019 (Ruang Aslab)
 - Memperlihatkan dataset yang udah diambil
 - Deteksi Gerak
 - Deteksi Wajah
 - nanti output dari deteksi wajahnya ditrain untuk dilakukan rekognisi
 - Perbanyak eksperimen di rekognisi, jangan kelamaan mikir deteksinya gimana
 
-bimbingan EAR 18/02/2019 (Roaster FIF Gd A)
+3. bimbingan EAR 18/02/2019 (Roaster FIF Gd A)
 > metode moving detection : Background substraction, 
 > metode tracking : Gaussian mixture model, karman filter
 - pakai background substraction
@@ -13,14 +17,14 @@ bimbingan EAR 18/02/2019 (Roaster FIF Gd A)
 - pakai bounding box yang besarnya dikira kira disitu ada area kepala
 - setelah itu langsung di ekstraksi fitur di area itu
 
-bimibingan FSV 08/03/2019 (E109)
+4. bimibingan FSV 08/03/2019 (E109)
 > Laporan background substraction
 - pahami modul background substraction yang dipakai
 - cari caranya gimana bisa deteksi kepala
 - worstcase ambil dataset baru
 - pakai resource yang kamu punya
 
-bimbingan EAR 26/03/2019 (E109)
+5. bimbingan EAR 26/03/2019 (E109)
 - deteksi pakai viola jones
 - gajadi pake background subtraction
 - otak atik gimana caranya mengeliminasi yang bukan wajah di viola jones
@@ -29,24 +33,35 @@ bimbingan EAR 26/03/2019 (E109)
 - Trim dataset saat posisi masuk dari pintu MM aja
 - dari dataset tersebut ambil masing masing 10 frame, yang selanjutnya akan dikelompokkan menjadi 1 kelas
 
-bimbingan FSV 27/03/2019 (E109)
+6. bimbingan FSV 27/03/2019 (E109)
 - dicobain dari viola jones itu semuanya yang tertangkap, terus dideteksi pakai deteksi mata, hasilnya berhasil mengeliminasi tidak? jika iya berarti ROI nya diambil sebagai training.
 
-bimbingan FSV 08/04/2019
+7. bimbingan FSV 08/04/2019
 - ekstraksi fitur pakai HOG
 - pelajari lagi BOW itu gimana
 
-bimbingan EAR 30/04/2019 
+8. bimbingan EAR 30/04/2019 
 - lanjutin ekstraksi ciri
 - bag of words = bag of visual words
 - boleh pake library, tidak masalah. karena bisa jadi lebih powerful dengan parameter parameter yang sudah disediakan. waktu pengerjaan lebih efisien, dan dapat memahami konsep lebih mudah
 
-bimbingan FSV 03/05/2019
+9. bimbingan FSV 03/05/2019
 - HOG tanpa svm
 - Kerjakan HOG-BOW sampai KNN dulu sampai beres
 - kalau sudah sampe klasifier, masuk bab 4 untuk tunning
 
-bimbingan FSV 10/07/2019
+10. bimbingan FSV 21/06/2019
+- apa saja yang harus dimasukkan dalam bab 4
+
+11. bimbingan EAR 25/06/2019
+- cara kerja Kmeans
+- jumlah data harus sama
+- pelabelan data
+
+12. bimbingan EAR 05/07/2019
+- pelabelan data
+
+13. bimbingan FSV 10/07/2019
 - kmeans iterasi 10kali terus dirata rata
 - svm? bukan wajah direcog kedetect wajah atau ega
 - testing violajones lagi train yang bukan wajah

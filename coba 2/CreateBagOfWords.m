@@ -1,10 +1,8 @@
 %Author: Jacob Gildenblat, 2014.
 %Creates a bag of words from a dataset.
 %blockSize is the size of the cells in the HoG descriptors.
-%patchSize is the size of the patches. Each patch is used for a HoG
-%descriptor.
-%directories is a cell array containing two directories with the training
-%images.
+%patchSize is the size of the patches. Each patch is used for a HoG descriptor.
+%directories is a cell array containing two directories with the training images.
 %trainSetPercentage sets how many images are used for training, and how
 %many are used for crosss validation.
 function features = CreateBagOfWords(blockSize, patchSize, directories, trainSetPercentage)
@@ -13,7 +11,8 @@ function features = CreateBagOfWords(blockSize, patchSize, directories, trainSet
     max_size = 10000;
     
     % mengalokasikan memori dengan membuat variable
-    features = zeros(max_size, patchSize * 31);
+%     features = zeros(max_size, patchSize * 31);
+    features = zeros(max_size, 36);
     
     index = 1;
     % Perulangan sebanyak direktori
