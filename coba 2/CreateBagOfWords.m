@@ -11,8 +11,8 @@ function features = CreateBagOfWords(blockSize, patchSize, directories, trainSet
     max_size = 10000;
     
     % mengalokasikan memori dengan membuat variable
-    features = zeros(max_size, patchSize * 31);
-%     features = zeros(max_size, 1536);
+%     features = zeros(max_size, patchSize * 31);
+    features = zeros(max_size, 1536);
     
     index = 1;
     % Perulangan sebanyak direktori
@@ -25,15 +25,10 @@ function features = CreateBagOfWords(blockSize, patchSize, directories, trainSet
         for ii=1:round(nfiles*trainSetPercentage)
             img = imread([directory ,'/', imagefiles(ii).name]);
             imgr = imresize(img, [80 88]); %resize for mathworks lib
-            if (size(img , 1) < patchSize * 2 || size(img, 2) < patchSize * 2)
-                continue;
-            end
-            hogPatches = ExtractHogPatches(img, patchSize, blockSize);
-            
-%             if (size(imgr , 1) < patchSize * 2 || size(imgr, 2) < patchSize * 2)
+%             if (size(img , 1) < patchSize(1) * 2 || size(img, 2) < patchSize(2) * 2)
 %                 continue;
 %             end
-%             hogPatches = ExtractHogPatches(imgr, patchSize, blockSize);
+            hogPatches = ExtractHogPatches(imgr, patchSize, blockSize);
             
             features(index : index + size(hogPatches, 1) - 1 , :) = hogPatches;
             index = index + size(hogPatches, 1);     

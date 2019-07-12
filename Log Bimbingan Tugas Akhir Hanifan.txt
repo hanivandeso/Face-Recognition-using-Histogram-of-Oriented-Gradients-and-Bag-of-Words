@@ -65,3 +65,11 @@
 - kmeans iterasi 10kali terus dirata rata
 - svm? bukan wajah direcog kedetect wajah atau ega
 - testing violajones lagi train yang bukan wajah
+
+14. bimbingan EAR 12/07/2019
+>label udah bener
+>svm kernel
+>kmeans
+
+-HOG?
+-Testing?

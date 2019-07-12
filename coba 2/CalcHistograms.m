@@ -37,10 +37,15 @@ function [D labels] = CalcHistograms(codebook, blockSize, patchSize, directories
         
         for ii = files
            img = imread([directory ,'/', imagefiles(ii).name]);
-%            if size(img , 1) < 128 || size(img, 2) < 128
+%            if size(img , 1) < patchSize(1) || size(img, 2) < patchSize(2)
 %                 continue;
-%            end
-           patches = ExtractHogPatches(img, patchSize, blockSize);
+%            end           
+           imgr = imresize(img, [80 88]); %resize for mathworks lib
+           if (size(imgr , 1) < patchSize(1) * 2 || size(imgr, 2) < patchSize(2) * 2)
+               continue;
+           end
+           patches = ExtractHogPatches(imgr, patchSize, blockSize);
+           
            D(index, : ) =  feature_histogram(codebook, patches);
            labels(index) = label;
            index = index + 1;

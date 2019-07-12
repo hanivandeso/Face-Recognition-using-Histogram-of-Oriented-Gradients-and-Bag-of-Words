@@ -1,47 +1,22 @@
 clear;
 clc;
 close all;
-
-% blockSize = [4 4];
-blockSize = 4;
-% patchSize = [40 44];
-patchSize = 16;
+%%
+blockSize = [2 2];
+patchSize = [40 44];
+% patchSize = 16;
 trainsetVal = 1;
 
-% directories = {' mac' , 'win'};
-directories = {fullfile('Data','Ade'),...
-    fullfile('Data', 'Alvin'),...
-    fullfile('Data', 'Ardy'),...
-    fullfile('Data', 'Daffa'),...
-    fullfile('Data', 'Fadil'),...
-    fullfile('Data', 'Hanif'),...
-    fullfile('Data', 'Liu'),...
-    fullfile('Data', 'Maula'),...
-    fullfile('Data', 'Mentari'),...
-    fullfile('Data', 'Muadz'),...
-    fullfile('Data', 'Nada'),...
-    fullfile('Data', 'Redy'),...
-    fullfile('Data', 'Rezky'),...
-    fullfile('Data', 'Ria'),...
-    fullfile('Data', 'Sena'),...
-    fullfile('Data', 'Wiranata'),...
-    fullfile('Data', 'Yuda')...
-    fullfile('Data', 'Yusuf')};
-% directories = {dir('Data\**')}
-% directories = {fullfile('Data','Ade'), fullfile('Data', 'Alvin')};
-
+directories = loadDir();
+%%
 disp('Collecting features from dataset.. ')
 features = CreateBagOfWords(blockSize, patchSize, directories, trainsetVal);
 features = features'; %matlab's kmeans
 disp('Features collected, clustering.. ')
 % [codebook, assignments] = vl_kmeans(features', 20, 'Initialization', 'plusplus'); %vl_kmeans
-
-
-% tic;
+%%
 [assignments, codebook] = kmeans(features', 80 ,'Distance','sqeuclidean','Display','final',...
     'Replicates',5); %matlab's kmeans
-% toc
-
 %Distance = euclidian (default)
 %Replicate = mencari distance terbaik disetiap iterasinya
 
@@ -69,22 +44,22 @@ for i = 1:cv.NumTestSets
     testPartition = Xtrain(cv.test(i),:);
     labelTestPartition = Ytrain(cv.test(i),:);
     
-%     svmParamsR = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
-%     svmParamsP = templateSVM('Standardize',true,'KernelFunction','polynomial'); % polynomial
+    svmParamsR = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
+    svmParamsP = templateSVM('Standardize',true,'KernelFunction','polynomial'); % polynomial
     svmParamsL = templateSVM('Standardize',true,'KernelFunction','linear'); %linear
-%     svmMdlR =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsR,'coding','onevsall');
-%     svmMdlP =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsP,'coding','onevsall');
+    svmMdlR =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsR,'coding','onevsall');
+    svmMdlP =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsP,'coding','onevsall');
     svmMdlL =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsL,'coding','onevsall');
     
-%     predictR = svmMdlR.predict(testPartition);
-%     correctPredictR = predictR == labelTestPartition; %Output Logical Value
-%     accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
-%     accuracyR(i);
-%     
-%     predictP = svmMdlP.predict(testPartition);
-%     correctPredictP = predictP == labelTestPartition; %Output Logical Value
-%     accuracyP(i) = sum(correctPredictP) / size(labelTestPartition, 1);
-%     accuracyP(i);
+    predictR = svmMdlR.predict(testPartition);
+    correctPredictR = predictR == labelTestPartition; %Output Logical Value
+    accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
+    accuracyR(i);
+    
+    predictP = svmMdlP.predict(testPartition);
+    correctPredictP = predictP == labelTestPartition; %Output Logical Value
+    accuracyP(i) = sum(correctPredictP) / size(labelTestPartition, 1);
+    accuracyP(i);
 %     
     predictL = svmMdlL.predict(testPartition);
     correctPredictL = predictL == labelTestPartition; %Output Logical Value
@@ -93,14 +68,14 @@ for i = 1:cv.NumTestSets
 %     
 end
 
-% % 0-rata-rata akurasi
-% averageAccR = mean(accuracyR);
-% percentAccR = averageAccR * 100;
-% percentAccR
-% 
-% averageAccP = mean(accuracyP);
-% percentAccP = averageAccP * 100;
-% percentAccP
+% 0-rata-rata akurasi
+averageAccR = mean(accuracyR);
+percentAccR = averageAccR * 100;
+percentAccR
+
+averageAccP = mean(accuracyP);
+percentAccP = averageAccP * 100;
+percentAccP
 
 averageAccL = mean(accuracyL);
 percentAccL = averageAccL * 100;
