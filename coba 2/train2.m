@@ -4,6 +4,7 @@ close all;
 
 % blockSize = [4 4];
 blockSize = 4;
+% patchSize = [40 44];
 patchSize = 16;
 trainsetVal = 1;
 
@@ -68,23 +69,23 @@ for i = 1:cv.NumTestSets
     testPartition = Xtrain(cv.test(i),:);
     labelTestPartition = Ytrain(cv.test(i),:);
     
-    svmParamsR = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
-    svmParamsP = templateSVM('Standardize',true,'KernelFunction','polynomial'); % polynomial
+%     svmParamsR = templateSVM('Standardize',true,'KernelFunction','gaussian'); %RBF
+%     svmParamsP = templateSVM('Standardize',true,'KernelFunction','polynomial'); % polynomial
     svmParamsL = templateSVM('Standardize',true,'KernelFunction','linear'); %linear
-    svmMdlR =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsR,'coding','onevsall');
-    svmMdlP =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsP,'coding','onevsall');
+%     svmMdlR =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsR,'coding','onevsall');
+%     svmMdlP =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsP,'coding','onevsall');
     svmMdlL =fitcecoc(XtrainPartition, YtrainPartition, 'Learners',svmParamsL,'coding','onevsall');
     
-    predictR = svmMdlR.predict(testPartition);
-    correctPredictR = predictR == labelTestPartition; %Output Logical Value
-    accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
-    accuracyR(i);
-    
-    predictP = svmMdlP.predict(testPartition);
-    correctPredictP = predictP == labelTestPartition; %Output Logical Value
-    accuracyP(i) = sum(correctPredictP) / size(labelTestPartition, 1);
-    accuracyP(i);
-    
+%     predictR = svmMdlR.predict(testPartition);
+%     correctPredictR = predictR == labelTestPartition; %Output Logical Value
+%     accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
+%     accuracyR(i);
+%     
+%     predictP = svmMdlP.predict(testPartition);
+%     correctPredictP = predictP == labelTestPartition; %Output Logical Value
+%     accuracyP(i) = sum(correctPredictP) / size(labelTestPartition, 1);
+%     accuracyP(i);
+%     
     predictL = svmMdlL.predict(testPartition);
     correctPredictL = predictL == labelTestPartition; %Output Logical Value
     accuracyL(i) = sum(correctPredictL) / size(labelTestPartition, 1);
@@ -92,14 +93,14 @@ for i = 1:cv.NumTestSets
 %     
 end
 
-% 0-rata-rata akurasi
-averageAccR = mean(accuracyR);
-percentAccR = averageAccR * 100;
-percentAccR
-
-averageAccP = mean(accuracyP);
-percentAccP = averageAccP * 100;
-percentAccP
+% % 0-rata-rata akurasi
+% averageAccR = mean(accuracyR);
+% percentAccR = averageAccR * 100;
+% percentAccR
+% 
+% averageAccP = mean(accuracyP);
+% percentAccP = averageAccP * 100;
+% percentAccP
 
 averageAccL = mean(accuracyL);
 percentAccL = averageAccL * 100;
