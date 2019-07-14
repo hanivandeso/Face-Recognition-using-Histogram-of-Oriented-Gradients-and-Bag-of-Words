@@ -53,7 +53,7 @@ for i = 1:cv.NumTestSets
 %     predictR = svmMdlR.predict(testPartition);
 %     correctPredictR = predictR == labelTestPartition; %Output Logical Value
 %     accuracyR(i) = sum(correctPredictR) / size(labelTestPartition, 1);
-%     accuracyR(i);
+%     accuracyR(i); 
 %     
 %     predictP = svmMdlP.predict(testPartition);
 %     correctPredictP = predictP == labelTestPartition; %Output Logical Value

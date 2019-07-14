@@ -7,7 +7,7 @@ for h=1:20
     vidWidth = vid.Width;
     vidHeight = vid.Height;
     
-    FaceDetector = vision.CascadeObjectDetector('FrontalFaceCART','UseROI',true,'MergeThreshold',14,'MinSize',[53 53]);
+    FaceDetector = vision.CascadeObjectDetector('FrontalFaceCART','UseROI',true,'MergeThreshold',11,'MinSize',[53 53]);
 
     mov = struct('cdata',zeros(vidHeight,vidWidth,3,'uint8'),'colormap',[]);
 
@@ -42,7 +42,7 @@ for h=1:20
 %         movie(hf,mov,2,vid.FrameRate);
 
         %export video
-        disp(strcat('exporting video-',num2str(h),' . . . .'));
+        disp(strcat('exporting video-',num2str(h),'....'));
         newVid = VideoWriter(strcat('Dataset3\coba-',num2str(h),'.mp4'),'MPEG-4');
         newVid.FrameRate = 24;
         newVid.Quality = 100;
